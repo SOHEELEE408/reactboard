@@ -13,7 +13,7 @@ const StyledBtn = styled.div`
     justify-content: space-between;
 `;
 
-class PostsReg extends Component{
+class PostsDetail extends Component{
     state = {
         author:'',
         title:'',
@@ -31,12 +31,12 @@ class PostsReg extends Component{
                     <TextField id="author" label="작성자" variant="outlined" onChange={this.handleChange}/>
                     <TextField id="title" label="제목" variant="outlined" onChange={this.handleChange}/>
                     <TextField id="content" label="내용"
-                           multiline rows={10}
-                           onChange={this.handleChange}
-                           variant="outlined"/>
+                               multiline rows={10}
+                               onChange={this.handleChange}
+                               variant="outlined"/>
                     <div> {this.state.author} {this.state.title} {this.state.content} </div>
                     <StyledBtn>
-                        <Button variant="contained" color="success">등록</Button>
+                        <Button variant="contained" color="success">수정</Button>
                         <Button variant="contained" color="error">취소</Button>
                     </StyledBtn>
                 </StyledForm>
@@ -47,4 +47,4 @@ class PostsReg extends Component{
 
 }
 
-export default PostsReg;
+export default PostsDetail;

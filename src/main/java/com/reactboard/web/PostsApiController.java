@@ -17,7 +17,7 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @GetMapping("/api/v1")
-    public PageImpl<PostsListResponseDto> findAll(@RequestParam Integer page){
+    public PageImpl<PostsListResponseDto> findAll(@RequestParam(value="page", defaultValue = "1") Integer page){
         PageRequest pageble = PageRequest.of(page -1,10);
 
         return postsService.findAll(pageble);

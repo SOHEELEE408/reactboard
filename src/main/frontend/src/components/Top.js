@@ -5,8 +5,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import styled from 'styled-components';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+const StyledTop = styled.div`
+   margin-bottom:20px;
+`;
 
 function appBarLabel(label) {
     return (
@@ -34,9 +38,11 @@ export default function EnableColorOnDarkAppBar() {
     return (
         <Stack spacing={2} sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={darkTheme}>
-                <AppBar position="static" color="primary">
-                    {appBarLabel('React Board')}
-                </AppBar>
+                <StyledTop>
+                    <AppBar position="static" color="primary">
+                        {appBarLabel('React Board')}
+                    </AppBar>
+                </StyledTop>
             </ThemeProvider>
         </Stack>
     );
