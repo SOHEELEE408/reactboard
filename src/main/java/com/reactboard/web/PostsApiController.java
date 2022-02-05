@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {
@@ -17,10 +19,8 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @GetMapping("/api/v1")
-    public PageImpl<PostsListResponseDto> findAll(@RequestParam(value="page", defaultValue = "1") Integer page){
-        PageRequest pageble = PageRequest.of(page -1,10);
-
-        return postsService.findAll(pageble);
+    public List<PostsListResponseDto> findAll(){
+        return postsService.findAll();
     }
 
     @PostMapping("/api/v1/posts")
