@@ -22,19 +22,7 @@ export default function DataTable() {
         { field: 'id', headerName: 'ID', minWidth: 70, flex:1},
         { field: 'title', headerName: 'Title', minWidth: 130, flex:1},
         { field: 'author', headerName: 'Author', minWidth: 130, flex:1 },
-        { field: 'createdDate', headerName: 'CreatedDate', minWidth: 130, flex:2 },
-        { field: 'btn', headerName: 'Detail', minWidth:130, flex:1,
-            renderCell:()=>(
-                <strong>
-                    <Button variant="contained"
-                            color="primary"
-                            size="small"
-                    >
-                        자세히
-                    </Button>
-                </strong>
-            )
-        }
+        { field: 'createdDate', headerName: 'CreatedDate', minWidth: 130, flex:2 }
     ];
 
     return (
