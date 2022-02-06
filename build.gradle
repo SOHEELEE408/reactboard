@@ -20,6 +20,7 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
 }
 
 node {
@@ -51,7 +52,7 @@ sourceSets{
 }
 
 processResources{
-    dependsOn "copyReactBuildFiles"
+    dependsOn "copyReactBuildFiles", "copyToLib"
 }
 
 task installReact(type:Exec){
