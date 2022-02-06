@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'war'
+    id "com.github.node-gradle.node" version '2.2.0'
 }
 
 group = 'com'
@@ -21,6 +22,11 @@ repositories {
     mavenCentral()
 }
 
+node {
+    version='16.13.2'
+    download=true
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -31,6 +37,8 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.github.jsimone:webapp-runner:9.0.27.1'
+
+
 }
 
 sourceSets{
