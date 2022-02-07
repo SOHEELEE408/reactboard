@@ -79,6 +79,7 @@
     ]
   },
   "proxy": "https://react-board-w-boot.com.herokuapp.com",
+  "homepage": "https://react-board-w-boot.com.herokuapp.com",
   "browserslist": {
     "production": [
       ">0.2%",
