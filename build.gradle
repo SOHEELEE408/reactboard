@@ -52,9 +52,9 @@ sourceSets{
 }
 
 processResources{
-    dependsOn "copyReactBuildFiles", "copyToLib"
+    dependsOn /*"copyReactBuildFiles",*/ "copyToLib"
 }
-
+/*
 task installReact(type:Exec){
     workingDir "$reactDir"
     inputs.dir "$reactDir"
@@ -87,6 +87,8 @@ task copyReactBuildFiles(type:Copy){
     from "$reactDir/build"
     into "$projectDir/src/main/resources/static"
 }
+*/
+
 
 task stage(){
     dependsOn clean, war
@@ -103,4 +105,8 @@ stage.dependsOn(copyToLib)
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootJar {
+    destinationDirectory = file("./target")
 }
