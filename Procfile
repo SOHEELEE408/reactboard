@@ -1,1 +1,1 @@
-web: java -jar build/server/webapp-runner-*.jar build/libs/*.war
+web: java -Dspring.server.port=$PORT -Dspring.profiles.active=production $JAVA_OPTS -jar "target/reactBoard-0.0.1-SNAPSHOT.jar"
