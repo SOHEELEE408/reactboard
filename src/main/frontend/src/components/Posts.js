@@ -4,54 +4,37 @@ import {Button} from "@mui/material";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-const rows = [];
-
-const Lists =()=>{
+export default function DataTable() {
     const [contents, setContents] =useState([]);
-    useEffect(()=>{
+
+    React.useEffect(()=>{
         axios.get('/api/v1',{
-            params:{
-                page:1
-            }
         }).then(response=>{
-                setContents(response.data);
-                rows.put(response.data);
-            });
+            setContents(response.data);
+        });
     },[]);
 
-}
-
-
-const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'title', headerName: 'Title', width: 130},
-    { field: 'author', headerName: 'Author', width: 130 },
-    { field: 'createdDate', headerName: 'CreatedDate', width: 130 },
-    { field: 'btn', headerName: 'Detail', width:130,
-        renderCell:()=>(
-            <strong>
-                <Button variant="contained"
-                        color="primary"
-                        size="small"
-                        href="api/v1/posts/1"
-                >
-                    자세히
-                </Button>
-            </strong>
-        )
+    const handleOnCellClick=(params)=>{
+       window.location.href=`detail/${params.id}`;
     }
-];
 
-export default function DataTable() {
+    const columns = [
+        { field: 'id', headerName: 'ID', minWidth: 70, flex:1},
+        { field: 'title', headerName: 'Title', minWidth: 130, flex:1},
+        { field: 'author', headerName: 'Author', minWidth: 130, flex:1 },
+        { field: 'createdDate', headerName: 'CreatedDate', minWidth: 130, flex:2 }
+    ];
+
     return (
-        Lists(),
         <div style={{ height: 400, width: '80%', marginLeft:50 }}>
             <DataGrid
-                rows={rows}
+                rows={contents}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                onCellClick={handleOnCellClick}
             />
+            <Button variant="contained" color="secondary" href={'/create'}>등록</Button>
         </div>
     );
 }

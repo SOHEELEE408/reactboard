@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import {Button, FormControl, TextField} from "@mui/material";
+import React, {useState} from "react";
+import {Button, TextField} from "@mui/material";
 import styled from 'styled-components';
+import axios from "axios";
 
 const StyledForm = styled.div`
     display: grid;
@@ -13,38 +14,42 @@ const StyledBtn = styled.div`
     justify-content: space-between;
 `;
 
-class PostsReg extends Component{
-    state = {
-        author:'',
-        title:'',
-        content:''
+export default function PostsReg(){
+    const [ values, setValues ] = useState({ title:"", content:""});
+
+    const handleChange =(e)=> {
+        const {id, value}=e.target;
+        setValues({...values, [id]: value});
+    };
+
+    const handlePost = async () => {
+        await axios.post('/api/v1/posts', values
+        ).then((response)=>{
+            console.log(response.data);
+            window.location.href='/';
+        })
     }
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        });
+
+    const handleCancle =()=>{
+        window.location.href='/';
     }
-    render(){
+
         return(
             <form>
                 <StyledForm>
-                    <TextField id="author" label="작성자" variant="outlined" onChange={this.handleChange}/>
-                    <TextField id="title" label="제목" variant="outlined" onChange={this.handleChange}/>
+                    <TextField id="author" label="작성자" variant="outlined" onChange={handleChange}/>
+                    <TextField id="title" label="제목" variant="outlined" onChange={handleChange}/>
                     <TextField id="content" label="내용"
                            multiline rows={10}
-                           onChange={this.handleChange}
+                           onChange={handleChange}
                            variant="outlined"/>
-                    <div> {this.state.author} {this.state.title} {this.state.content} </div>
                     <StyledBtn>
-                        <Button variant="contained" color="success">등록</Button>
-                        <Button variant="contained" color="error">취소</Button>
+                        <Button variant="contained" color="success" onClick={handlePost}>등록</Button>
+                        <Button variant="contained" color="error" onClick={handleCancle}>취소</Button>
                     </StyledBtn>
                 </StyledForm>
             </form>
 
         );
-    }
 
 }
-
-export default PostsReg;
