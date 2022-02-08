@@ -38,8 +38,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'com.github.jsimone:webapp-runner:9.0.27.1'
-
+    testImplementation("org.junit.vintage:junit-vintage-engine") {
+        exclude group: "org.hamcrest", module: "hamcrest-core"
+    }
 
 }
 
@@ -52,9 +53,9 @@ sourceSets{
 }
 
 processResources{
-    dependsOn /*"copyReactBuildFiles",*/ "copyToLib"
+    dependsOn "copyReactBuildFiles"
 }
-/*
+
 task installReact(type:Exec){
     workingDir "$reactDir"
     inputs.dir "$reactDir"
@@ -87,28 +88,9 @@ task copyReactBuildFiles(type:Copy){
     from "$reactDir/build"
     into "$projectDir/src/main/resources/static"
 }
- */
-
-
-task stage(){
-    dependsOn clean, war
-}
-war.mustRunAfter clean
-
-task copyToLib(type:Copy){
-    into "$buildDir/server"
-    from(configurations.compileClasspath){
-        include "webapp-runner*"
-    }
-}
-stage.dependsOn(copyToLib)
-
 
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-bootJar {
-    destinationDirectory = file("./target")
-}

@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 
 class InputTest extends Component{
     state = {
@@ -10,7 +10,9 @@ class InputTest extends Component{
         })
     }
     render() {
+
         return (
+
             <form>
                 <input
                     placeholder="이름"
@@ -19,6 +21,7 @@ class InputTest extends Component{
                 />
                 <div>{this.state.name}</div>
             </form>
+
         );
     }
 }
