@@ -30,7 +30,9 @@ export default function PostsDetail() {
 
             const data = content;
 
-            const [ values, setValues ] = useState({ title:"", content:""});
+            const [ values, setValues ] = useState({ title:data.title, content:data.content});
+
+
 
             const handleChange =(e)=> {
                 const {id, value}=e.target;
@@ -38,9 +40,13 @@ export default function PostsDetail() {
             };
 
             const handleModify = async () => {
+                if(values.title === undefined)
+                    values.title=data.title;
+                if(values.content === undefined)
+                    values.content=data.content;
                 await axios.put(`/api/v1/posts/${id}`, values
                 ).then((response)=>{
-                    console(response.data);
+                    console.log(response.data);
                     window.location.href='/';
                 })
             }
@@ -63,13 +69,13 @@ export default function PostsDetail() {
                 <form>
                     <StyledForm>
                         <TextField id="author" label="작성자" variant="outlined" multiline rows={1}
-                                   defaultValue={data.author ||''}
+                                   value={data.author || ''}
                         />
-                        <TextField id="title" label="제목" variant="outlined" multiline rows={1} defaultValue={data.title||''} onChange={handleChange}/>
+                        <TextField id="title" label="제목" variant="outlined" multiline rows={1} defaultValue={data.title} onChange={handleChange}/>
                         <TextField id="content" label="내용"
                                    multiline rows={10}
                                    variant="outlined"
-                                   defaultValue={data.content||''}
+                                   defaultValue={data.content}
                                    onChange={handleChange}
                         />
                         <StyledBtn>
