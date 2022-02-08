@@ -4,7 +4,7 @@ module.exports=function(app){
     app.use(
         '/api',
         createProxyMiddleware({
-            target:'https://react-board-w-boot.com.herokuapp.com',
+            target:'http://localhost:8080',
             changeOrigin:true,
         })
     )
