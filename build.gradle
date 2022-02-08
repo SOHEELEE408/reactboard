@@ -89,8 +89,27 @@ task copyReactBuildFiles(type:Copy){
     into "$projectDir/src/main/resources/static"
 }
 
+task runReactServer(type: NpmTask) {
+    workingDir = file(reactDir);
+    args = ["run", "start"]
+}
+
+bootRun.doFirst {
+    runReactServer
+}
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+bootJar {
+    jar.enabled = true // 빌드시 jar 을 실행
+}
+
+jar {
+    manifest { // 빌드시 Main-Class 설정
+        attributes 'Main-Class': 'com.reactboard.ReactboardApplication'
+    }
+}
+
 
